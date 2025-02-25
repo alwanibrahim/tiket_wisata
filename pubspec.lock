@@ -161,6 +161,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
+  concentric_transition:
+    dependency: "direct main"
+    description:
+      name: concentric_transition
+      sha256: "825191221e4bc6a0cfaf00adbc5cd2cc1333970f61311bce52021f1f68e0a891"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   convert:
     dependency: transitive
     description:
@@ -185,6 +193,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
+  d_input:
+    dependency: "direct main"
+    description:
+      name: d_input
+      sha256: b0b3fb368a2266838460f4b1ac82bfcc28d30cdd74b1b91c24f34e0746482504
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.1"
   dart_style:
     dependency: transitive
     description:
@@ -238,14 +254,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_gen:
+  flutter_animate:
     dependency: "direct main"
     description:
-      name: flutter_gen
-      sha256: a727fbe4d9443ac05258ef7a987650f8d8f16b4f8c22cf98c1ac9183ac7f3eff
+      name: flutter_animate
+      sha256: "7befe2d3252728afb77aecaaea1dec88a89d35b9b1d2eea6d04479e8af9117b5"
       url: "https://pub.dev"
     source: hosted
-    version: "5.9.0"
+    version: "4.5.2"
   flutter_gen_core:
     dependency: transitive
     description:
@@ -270,6 +286,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
+  flutter_shaders:
+    dependency: transitive
+    description:
+      name: flutter_shaders
+      sha256: "34794acadd8275d971e02df03afee3dee0f98dbfb8c4837082ad0034f612a3e2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -283,6 +307,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+  gap:
+    dependency: "direct main"
+    description:
+      name: gap
+      sha256: f19387d4e32f849394758b91377f9153a1b41d79513ef7668c088c77dbc6955d
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   glob:
     dependency: transitive
     description:
@@ -778,4 +810,4 @@ packages:
     version: "3.1.3"
 sdks:
   dart: ">=3.6.0 <4.0.0"
-  flutter: ">=3.24.0"
+  flutter: ">=3.24.1"

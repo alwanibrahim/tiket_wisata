@@ -24,11 +24,11 @@ class $AssetsImagesGen {
   const $AssetsImagesGen();
 
   /// File path: assets/images/alex-varela-pkmEdKpFM4k-unsplash.jpg
-  AssetGenImage get alex =>
+  AssetGenImage get alexVarelaPkmEdKpFM4kUnsplash =>
       const AssetGenImage('assets/images/alex-varela-pkmEdKpFM4k-unsplash.jpg');
 
   /// List of all assets
-  List<AssetGenImage> get values => [alex];
+  List<AssetGenImage> get values => [alexVarelaPkmEdKpFM4kUnsplash];
 }
 
 class Assets {

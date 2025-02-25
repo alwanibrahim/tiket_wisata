@@ -15,7 +15,11 @@ dependencies:
   cupertino_icons: ^1.0.8
   provider: ^6.1.2
   google_fonts: ^6.2.1
-  flutter_gen: any
+  gap: ^3.0.1
+  d_input: ^0.5.1
+  concentric_transition: ^1.0.3
+  flutter_animate: ^4.2.0
+  
 
 dev_dependencies:
   flutter_test:

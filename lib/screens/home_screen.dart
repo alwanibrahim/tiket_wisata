@@ -18,8 +18,6 @@ class HomeScreen extends StatelessWidget {
 
             SizedBox(height: 20),
 
-            // Menampilkan gambar dari assets
-            Image.asset(Assets.images.alex.path, width: 200),
 
             SizedBox(height: 20),
 
