@@ -16,8 +16,11 @@ class $AssetsIconsGen {
   AssetGenImage get homeIcon =>
       const AssetGenImage('assets/icons/home-icon.png');
 
+  /// File path: assets/icons/icons.png
+  AssetGenImage get icons => const AssetGenImage('assets/icons/icons.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [homeIcon];
+  List<AssetGenImage> get values => [homeIcon, icons];
 }
 
 class $AssetsImagesGen {
@@ -27,8 +30,30 @@ class $AssetsImagesGen {
   AssetGenImage get alexVarelaPkmEdKpFM4kUnsplash =>
       const AssetGenImage('assets/images/alex-varela-pkmEdKpFM4k-unsplash.jpg');
 
+  /// File path: assets/images/gambar01.png
+  AssetGenImage get gambar01 =>
+      const AssetGenImage('assets/images/gambar01.png');
+
+  /// File path: assets/images/gambar02.png
+  AssetGenImage get gambar02 =>
+      const AssetGenImage('assets/images/gambar02.png');
+
+  /// File path: assets/images/signUp01.png
+  AssetGenImage get signUp01 =>
+      const AssetGenImage('assets/images/signUp01.png');
+
+  /// File path: assets/images/signUp02.png
+  AssetGenImage get signUp02 =>
+      const AssetGenImage('assets/images/signUp02.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [alexVarelaPkmEdKpFM4kUnsplash];
+  List<AssetGenImage> get values => [
+    alexVarelaPkmEdKpFM4kUnsplash,
+    gambar01,
+    gambar02,
+    signUp01,
+    signUp02,
+  ];
 }
 
 class Assets {

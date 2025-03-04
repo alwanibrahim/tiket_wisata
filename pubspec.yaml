@@ -19,6 +19,8 @@ dependencies:
   d_input: ^0.5.1
   concentric_transition: ^1.0.3
   flutter_animate: ^4.2.0
+  salomon_bottom_bar: ^3.3.2
+  carousel_slider: ^5.0.0
   
 
 dev_dependencies:
@@ -32,8 +34,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/icons/
-    - assets/images/
+    - assets/
+
 
 flutter_gen:
   output: lib/gen/
