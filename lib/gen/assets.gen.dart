@@ -9,58 +9,25 @@
 
 import 'package:flutter/widgets.dart';
 
-class $AssetsIconsGen {
-  const $AssetsIconsGen();
-
-  /// File path: assets/icons/home-icon.png
-  AssetGenImage get homeIcon =>
-      const AssetGenImage('assets/icons/home-icon.png');
-
-  /// File path: assets/icons/icons.png
-  AssetGenImage get icons => const AssetGenImage('assets/icons/icons.png');
-
-  /// List of all assets
-  List<AssetGenImage> get values => [homeIcon, icons];
-}
-
-class $AssetsImagesGen {
-  const $AssetsImagesGen();
-
-  /// File path: assets/images/alex-varela-pkmEdKpFM4k-unsplash.jpg
-  AssetGenImage get alexVarelaPkmEdKpFM4kUnsplash =>
-      const AssetGenImage('assets/images/alex-varela-pkmEdKpFM4k-unsplash.jpg');
-
-  /// File path: assets/images/gambar01.png
-  AssetGenImage get gambar01 =>
-      const AssetGenImage('assets/images/gambar01.png');
-
-  /// File path: assets/images/gambar02.png
-  AssetGenImage get gambar02 =>
-      const AssetGenImage('assets/images/gambar02.png');
-
-  /// File path: assets/images/signUp01.png
-  AssetGenImage get signUp01 =>
-      const AssetGenImage('assets/images/signUp01.png');
-
-  /// File path: assets/images/signUp02.png
-  AssetGenImage get signUp02 =>
-      const AssetGenImage('assets/images/signUp02.png');
-
-  /// List of all assets
-  List<AssetGenImage> get values => [
-    alexVarelaPkmEdKpFM4kUnsplash,
-    gambar01,
-    gambar02,
-    signUp01,
-    signUp02,
-  ];
-}
-
 class Assets {
   const Assets._();
 
-  static const $AssetsIconsGen icons = $AssetsIconsGen();
-  static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const AssetGenImage gambar01 = AssetGenImage('assets/gambar01.png');
+  static const AssetGenImage gambar02 = AssetGenImage('assets/gambar02.png');
+  static const AssetGenImage icons = AssetGenImage('assets/icons.png');
+  static const AssetGenImage profile = AssetGenImage('assets/profile.jpeg');
+  static const AssetGenImage signUp01 = AssetGenImage('assets/signUp01.png');
+  static const AssetGenImage signUp02 = AssetGenImage('assets/signUp02.png');
+
+  /// List of all assets
+  static List<AssetGenImage> get values => [
+    gambar01,
+    gambar02,
+    icons,
+    profile,
+    signUp01,
+    signUp02,
+  ];
 }
 
 class AssetGenImage {
