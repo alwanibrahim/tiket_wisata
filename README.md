@@ -1,16 +1,23 @@
-# appbar
+# Al-Qur'an App
 
-A new Flutter project.
+Aplikasi Al-Qur'an berbasis Flutter.
 
-## Getting Started
+## Deskripsi
 
-This project is a starting point for a Flutter application.
+Aplikasi ini dirancang untuk membantu pengguna membaca, mencari, dan memahami Al-Qur'an dengan fitur-fitur interaktif.
 
-A few resources to get you started if this is your first Flutter project:
+## Fitur Utama
+- 📖 **Baca Al-Qur'an**: Akses semua surah dan ayat dengan tampilan yang nyaman.
+- 🔍 **Pencarian Ayat**: Temukan ayat berdasarkan kata kunci.
+- 🎧 **Audio Qur'an**: Dengarkan bacaan Al-Qur'an dari qari pilihan.
+- 🌙 **Mode Gelap**: Tampilan yang nyaman untuk membaca di malam hari.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Panduan Memulai
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Clone repository ini:
+   ```bash
+   git clone https://github.com/alwanibrahim/tiket_wisata.git
+
+
+
+Kalau ada yg kurang bilang aja.. jgn diem.. oke.. sip!
