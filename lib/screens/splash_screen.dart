@@ -4,22 +4,22 @@ import 'package:tiket_wisata/screens/login_screen.dart';
 
 final pages = [
   const PageData(
-    icon: Icons.food_bank_outlined,
-    title: "Search for your favourite food",
-    bgColor: Color(0xff3b1791),
+    icon: Icons.menu_book, // Ikon buku untuk Al-Quran
+    title: "Baca Al-Quran",
+    bgColor: Color(0xff2E7D32), // Warna hijau yang tenang
     textColor: Colors.white,
   ),
   const PageData(
-    icon: Icons.shopping_bag_outlined,
-    title: "Add it to cart",
-    bgColor: Color(0xfffab800),
-    textColor: Color(0xff3b1790),
+    icon: Icons.search, // Ikon pencarian untuk mencari ayat
+    title: "Cari Ayat",
+    bgColor: Color(0xff1565C0), // Warna biru yang menenangkan
+    textColor: Colors.white,
   ),
   const PageData(
-    icon: Icons.delivery_dining,
-    title: "Order and wait",
-    bgColor: Color(0xffffffff),
-    textColor: Color(0xff3b1790),
+    icon: Icons.audiotrack, // Ikon audio untuk mendengarkan Al-Quran
+    title: "Dengarkan Murattal",
+    bgColor: Color(0xff6A1B9A), // Warna ungu yang elegan
+    textColor: Colors.white,
   ),
 ];
 
@@ -36,6 +36,7 @@ class SplashScreen extends StatelessWidget {
           child: Icon(
             Icons.navigate_next,
             size: screenWidth * 0.08,
+            color: Colors.white,
           ),
         ),
         itemCount: pages.length,
@@ -57,7 +58,23 @@ class SplashScreen extends StatelessWidget {
                               builder: (context) => LoginScreen()),
                         );
                       },
-                      child: Text("Get Started"),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                      child: Text(
+                        "Mulai",
+                        style: TextStyle(
+                          color: page.bgColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins',
+                        ),
+                      ),
                     ),
                   ),
               ],
@@ -97,20 +114,37 @@ class _Page extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(16.0),
           margin: const EdgeInsets.all(16.0),
-          decoration:
-              BoxDecoration(shape: BoxShape.circle, color: page.textColor),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              colors: [page.bgColor, page.bgColor.withOpacity(0.7)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 10,
+                spreadRadius: 3,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
           child: Icon(
             page.icon,
             size: screenHeight * 0.1,
-            color: page.bgColor,
+            color: Colors.white,
           ),
         ),
+        SizedBox(height: 20),
         Text(
           page.title ?? "",
           style: TextStyle(
-              color: page.textColor,
-              fontSize: screenHeight * 0.035,
-              fontWeight: FontWeight.bold),
+            color: page.textColor,
+            fontSize: screenHeight * 0.035,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Poppins', // Gunakan font kustom
+          ),
           textAlign: TextAlign.center,
         ),
       ],

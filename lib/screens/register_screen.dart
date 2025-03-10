@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:lottie/lottie.dart'; // Import package lottie
 import 'package:tiket_wisata/screens/login_screen.dart';
-
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -20,7 +20,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final email = emailController.text;
     final password = passwordController.text;
     if (email.isEmpty || password.isEmpty) {
-      showInvalidMessage('masukkan nama yg valid');
+      showInvalidMessage('Masukkan email dan password yang valid');
       return;
     }
 
@@ -40,7 +40,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         showInvalidMessage('Register gagal: ${errorData['error']}');
       }
     } catch (e) {
-      showInvalidMessage('error $e');
+      showInvalidMessage('Error: $e');
     }
   }
 
@@ -56,16 +56,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
+          // Animasi Lottie untuk latar belakang atas
           Align(
             alignment: Alignment.topLeft,
-            child: Image.asset(
-              "assets/signUp01.png",
-              width: MediaQuery.of(context).size.width * 0.3,
+            child: Lottie.asset(
+              "assets/masjid.json", // File JSON Lottie
+              width: MediaQuery.of(context).size.width * 0.9,
+              fit: BoxFit.cover,
             ),
           ),
           SingleChildScrollView(
@@ -86,12 +89,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Form(
                   child: Column(
                     children: [
+                      // Input Username
                       Padding(
-                        padding: EdgeInsets.only(left: 30, right: 30),
+                        padding: EdgeInsets.only(left: 30, right: 30,top: 30),
                         child: Material(
                           elevation: 4,
-                          borderRadius: BorderRadius.circular(
-                              MediaQuery.of(context).size.width * 0.1),
+                          borderRadius: BorderRadius.circular(20),
                           child: TextFormField(
                             decoration: InputDecoration(
                               hintText: "Username",
@@ -100,30 +103,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               prefixIcon: Icon(
                                 Icons.person,
-                                size: MediaQuery.of(context).size.width * 0.06,
                                 color: Colors.grey,
                               ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
-                                ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide.none,
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: BorderSide(
-                                  color:
-                                      const Color.fromARGB(255, 225, 121, 243),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.008,
-                                ),
-                              ),
+                              filled: true,
+                              fillColor: Colors.white,
                             ),
                           ),
                         ),
@@ -131,14 +118,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.02,
                       ),
+                      // Input Password
                       Padding(
                         padding: EdgeInsets.only(left: 30, right: 30),
                         child: Material(
                           elevation: 4,
-                          borderRadius: BorderRadius.circular(
-                              MediaQuery.of(context).size.width * 0.1),
+                          borderRadius: BorderRadius.circular(20),
                           child: TextFormField(
                             controller: passwordController,
+                            obscureText: true,
                             decoration: InputDecoration(
                               hintText: "Password",
                               hintStyle: TextStyle(
@@ -146,47 +134,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               prefixIcon: Icon(
                                 Icons.lock,
-                                size: MediaQuery.of(context).size.width * 0.06,
                                 color: Colors.grey,
                               ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
-                                ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide.none,
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: BorderSide(
-                                  color:
-                                      const Color.fromARGB(255, 225, 121, 243),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.008,
-                                ),
-                              ),
+                              filled: true,
+                              fillColor: Colors.white,
                             ),
-                            keyboardType: TextInputType.visiblePassword,
                           ),
                         ),
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.02,
                       ),
+                      // Input Email
                       Padding(
                         padding: EdgeInsets.only(left: 30, right: 30),
                         child: Material(
                           elevation: 4,
-                          borderRadius: BorderRadius.circular(
-                              MediaQuery.of(context).size.width * 0.1),
+                          borderRadius: BorderRadius.circular(20),
                           child: TextFormField(
-                                                        controller: emailController,
-
+                            controller: emailController,
                             decoration: InputDecoration(
                               hintText: "Email",
                               hintStyle: TextStyle(
@@ -194,58 +164,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               prefixIcon: Icon(
                                 Icons.email,
-                                size: MediaQuery.of(context).size.width * 0.06,
                                 color: Colors.grey,
                               ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.01),
-                                ),
-                                borderSide: const BorderSide(
-                                  color: Colors.red,
-                                ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide.none,
                               ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: BorderSide(
-                                  color: Colors.red,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.01,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: BorderSide(
-                                  color:
-                                      const Color.fromARGB(255, 225, 121, 243),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.008,
-                                ),
-                              ),
+                              filled: true,
+                              fillColor: Colors.white,
                             ),
                             keyboardType: TextInputType.emailAddress,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'This field cannot be empty';
+                                return 'Email tidak boleh kosong';
                               }
                               if (!value.contains('@')) {
-                                return 'Please enter a valid email';
+                                return 'Masukkan email yang valid';
                               }
                               return null;
                             },
@@ -255,52 +189,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.02,
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 30, right: 30),
-                        child: Material(
-                          elevation: 4,
-                          borderRadius: BorderRadius.circular(
-                              MediaQuery.of(context).size.width * 0.1),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              hintText: "Mobile",
-                              hintStyle: TextStyle(
-                                color: Colors.grey,
-                              ),
-                              prefixIcon: Icon(
-                                Icons.lock,
-                                size: MediaQuery.of(context).size.width * 0.06,
-                                color: Colors.grey,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: BorderSide(
-                                  color:
-                                      const Color.fromARGB(255, 225, 121, 243),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.008,
-                                ),
-                              ),
-                            ),
-                            keyboardType: TextInputType.phone,
-                          ),
-                        ),
-                      ),
+                      // Input Mobile
+                      // Padding(
+                      //   padding: EdgeInsets.only(left: 30, right: 30),
+                      //   child: Material(
+                      //     elevation: 4,
+                      //     borderRadius: BorderRadius.circular(20),
+                      //     child: TextFormField(
+                      //       decoration: InputDecoration(
+                      //         hintText: "Mobile",
+                      //         hintStyle: TextStyle(
+                      //           color: Colors.grey,
+                      //         ),
+                      //         prefixIcon: Icon(
+                      //           Icons.phone,
+                      //           color: Colors.grey,
+                      //         ),
+                      //         border: OutlineInputBorder(
+                      //           borderRadius: BorderRadius.circular(20),
+                      //           borderSide: BorderSide.none,
+                      //         ),
+                      //         filled: true,
+                      //         fillColor: Colors.white,
+                      //       ),
+                      //       keyboardType: TextInputType.phone,
+                      //     ),
+                      //   ),
+                      // ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.10,
                       ),
+                      // Tombol Sign Up
                       Padding(
                         padding: const EdgeInsets.only(right: 32),
                         child: Row(
@@ -318,34 +237,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             Material(
                               elevation: 4,
-                              borderRadius: BorderRadius.circular(
-                                MediaQuery.of(context).size.height * 0.1,
-                              ),
+                              borderRadius: BorderRadius.circular(20),
                               child: Container(
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
-                                      Color.fromARGB(255, 255, 230, 85),
-                                      Color.fromARGB(255, 176, 74, 166),
-                                    ], // Define your gradient colors
-                                    begin: Alignment
-                                        .bottomRight, // Define the starting point of the gradient
-                                    end: Alignment
-                                        .topLeft, // Define the ending point of the gradient
+                                      Color(0xff2E7D32), // Hijau
+                                      Color(0xff1B5E20), // Hijau tua
+                                    ],
+                                    begin: Alignment.bottomRight,
+                                    end: Alignment.topLeft,
                                   ),
-                                  borderRadius: BorderRadius.circular(
-                                    MediaQuery.of(context).size.height * 0.1,
-                                  ),
+                                  borderRadius: BorderRadius.circular(20),
                                 ),
                                 width: MediaQuery.of(context).size.width * 0.18,
                                 height:
                                     MediaQuery.of(context).size.height * 0.05,
                                 child: IconButton(
                                   onPressed: register,
-                                  icon: Icon(Icons.navigate_next_rounded),
+                                  icon: Icon(
+                                    Icons.navigate_next_rounded,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -366,18 +282,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Image.asset(
-              "assets/signUp02.png",
-              height: MediaQuery.of(context).size.height * 0.25,
-            ),
-          ),
+          // Animasi Lottie untuk latar belakang bawah
+          // Align(
+          //   alignment: Alignment.bottomLeft,
+          //   child: Lottie.asset(
+          //     "assets/alquran.json", // File JSON Lottie
+          //     height: MediaQuery.of(context).size.height * 0.25,
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
         ],
       ),
     );
   }
 }
-
-
- 

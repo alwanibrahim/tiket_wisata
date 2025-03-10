@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:lottie/lottie.dart'; // Import package lottie
 import 'package:tiket_wisata/main_layout.dart';
 import 'package:tiket_wisata/screens/register_screen.dart';
-
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -17,31 +17,30 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  Future<void> register() async {
+  Future<void> login() async {
     final email = emailController.text;
     final password = passwordController.text;
     if (email.isEmpty || password.isEmpty) {
-      showInvalidMessage('masukkan nama yg valid');
+      showInvalidMessage('Masukkan email dan password yang valid');
       return;
     }
 
     try {
-      final response = await http.post(
-          Uri.parse('https://reqres.in/api/login'),
+      final response = await http.post(Uri.parse('https://reqres.in/api/login'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({'email': email, 'password': password}));
 
       if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        showInvalidMessage('Berhasil register! Token: ${data['token']}');
+        // final data = jsonDecode(response.body);
+        // showInvalidMessage('Login berhasil! Token: ${data['token']}');
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => MainLayout()));
       } else {
         final errorData = jsonDecode(response.body);
-        showInvalidMessage('Register gagal: ${errorData['error']}');
+        showInvalidMessage('Login gagal: ${errorData['error']}');
       }
     } catch (e) {
-      showInvalidMessage('error $e');
+      showInvalidMessage('Error: $e');
     }
   }
 
@@ -63,11 +62,13 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Stack(
         children: [
+          // Animasi Lottie untuk latar belakang atas
           Align(
             alignment: Alignment.topLeft,
-            child: Image.asset(
-              "assets/gambar01.png",
+            child: Lottie.asset(
+              "assets/masjid.json", // File JSON Lottie
               width: MediaQuery.of(context).size.width * 0.9,
+              fit: BoxFit.cover,
             ),
           ),
           SingleChildScrollView(
@@ -79,16 +80,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: MediaQuery.of(context).size.height * 0.15,
                 ),
                 const Text(
-                  "Hello",
-                  style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
+                  "Selamat Datang",
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xff2E7D32), // Warna hijau Islami
+                    fontFamily: 'Poppins', // Gunakan font kustom
+                  ),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.015,
                 ),
                 const Text(
-                  "Sign in to your account",
+                  "Masuk untuk melanjutkan",
                   style: TextStyle(
                     fontSize: 18,
+                    color: Colors.grey,
+                    fontFamily: 'Poppins', // Gunakan font kustom
                   ),
                 ),
                 SizedBox(
@@ -97,73 +105,38 @@ class _LoginScreenState extends State<LoginScreen> {
                 Form(
                   child: Column(
                     children: [
+                      // Input Email
                       Padding(
                         padding: EdgeInsets.only(left: 30, right: 30),
                         child: Material(
                           elevation: 4,
-                          borderRadius: BorderRadius.circular(
-                              MediaQuery.of(context).size.width * 0.1),
+                          borderRadius: BorderRadius.circular(20),
                           child: TextFormField(
                             controller: emailController,
                             decoration: InputDecoration(
                               hintText: "Email",
                               hintStyle: TextStyle(
                                 color: Colors.grey,
+                                fontFamily: 'Poppins',
                               ),
                               prefixIcon: Icon(
                                 Icons.email,
-                                size: MediaQuery.of(context).size.width * 0.06,
                                 color: Colors.grey,
                               ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.01),
-                                ),
-                                borderSide: const BorderSide(
-                                  color: Colors.red,
-                                ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide.none,
                               ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: BorderSide(
-                                  color: Colors.red,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.01,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: BorderSide(
-                                  color:
-                                      const Color.fromARGB(255, 225, 121, 243),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.008,
-                                ),
-                              ),
+                              filled: true,
+                              fillColor: Colors.white,
                             ),
                             keyboardType: TextInputType.emailAddress,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'This field cannot be empty';
+                                return 'Email tidak boleh kosong';
                               }
                               if (!value.contains('@')) {
-                                return 'Please enter a valid email';
+                                return 'Masukkan email yang valid';
                               }
                               return null;
                             },
@@ -173,73 +146,35 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.035,
                       ),
+                      // Input Password
                       Padding(
                         padding: EdgeInsets.only(left: 30, right: 30),
                         child: Material(
                           elevation: 4,
-                          borderRadius: BorderRadius.circular(
-                              MediaQuery.of(context).size.width * 0.1),
+                          borderRadius: BorderRadius.circular(20),
                           child: TextFormField(
                             controller: passwordController,
+                            obscureText: true,
                             decoration: InputDecoration(
                               hintText: "Password",
                               hintStyle: TextStyle(
                                 color: Colors.grey,
+                                fontFamily: 'Poppins',
                               ),
                               prefixIcon: Icon(
                                 Icons.lock,
-                                size: MediaQuery.of(context).size.width * 0.06,
                                 color: Colors.grey,
                               ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.01),
-                                ),
-                                borderSide: const BorderSide(
-                                  color: Colors.red,
-                                ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide.none,
                               ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: BorderSide(
-                                  color: Colors.red,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.01,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: BorderSide(
-                                  color:
-                                      const Color.fromARGB(255, 225, 121, 243),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.008,
-                                ),
-                              ),
+                              filled: true,
+                              fillColor: Colors.white,
                             ),
-                            keyboardType: TextInputType.emailAddress,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'This field cannot be empty';
-                              }
-                              if (!value.contains('@')) {
-                                return 'Please enter a valid email';
+                                return 'Password tidak boleh kosong';
                               }
                               return null;
                             },
@@ -249,14 +184,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.03,
                       ),
+                      // Tombol Lupa Password
                       Padding(
                         padding: const EdgeInsets.only(right: 32),
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: Text(
-                            "Forget you password",
+                            "Lupa password?",
                             style: TextStyle(
                               color: Colors.grey,
+                              fontFamily: 'Poppins',
                             ),
                           ),
                         ),
@@ -264,16 +201,19 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.10,
                       ),
+                      // Tombol Sign In
                       Padding(
                         padding: const EdgeInsets.only(right: 32),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text(
-                              "Sign in",
+                              "Masuk",
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
+                                color: Color(0xff2E7D32),
+                                fontFamily: 'Poppins',
                               ),
                             ),
                             SizedBox(
@@ -281,46 +221,47 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             Material(
                               elevation: 4,
-                              borderRadius: BorderRadius.circular(
-                                MediaQuery.of(context).size.height * 0.1,
-                              ),
+                              borderRadius: BorderRadius.circular(20),
                               child: Container(
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
-                                      Color.fromARGB(255, 255, 230, 85),
-                                      Color.fromARGB(255, 176, 74, 166),
-                                    ], // Define your gradient colors
-                                    begin: Alignment
-                                        .bottomRight, // Define the starting point of the gradient
-                                    end: Alignment
-                                        .topLeft, // Define the ending point of the gradient
+                                      Color(0xff2E7D32), // Hijau
+                                      Color(0xff1B5E20), // Hijau tua
+                                    ],
+                                    begin: Alignment.bottomRight,
+                                    end: Alignment.topLeft,
                                   ),
-                                  borderRadius: BorderRadius.circular(
-                                    MediaQuery.of(context).size.height * 0.1,
-                                  ),
+                                  borderRadius: BorderRadius.circular(20),
                                 ),
                                 width: MediaQuery.of(context).size.width * 0.18,
                                 height:
                                     MediaQuery.of(context).size.height * 0.05,
                                 child: IconButton(
-                                  onPressed: register,
-                                  icon: Icon(Icons.navigate_next_rounded),
+                                  onPressed: login,
+                                  icon: Icon(
+                                    Icons.navigate_next_rounded,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.1,
                       ),
+                      // Teks Daftar Akun Baru
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Don't have an account? ",
-                            style: TextStyle(fontSize: 14),
+                            "Belum punya akun? ",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontFamily: 'Poppins',
+                            ),
                           ),
                           GestureDetector(
                             onTap: () {
@@ -332,12 +273,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               );
                             },
                             child: Text(
-                              "Create",
+                              "Daftar",
                               style: TextStyle(
                                 decoration: TextDecoration.underline,
                                 decorationThickness: 2.0,
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
+                                color: Color(0xff2E7D32),
+                                fontFamily: 'Poppins',
                               ),
                             ),
                           ),
@@ -349,13 +292,15 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Image.asset(
-              "assets/gambar02.png",
-              height: MediaQuery.of(context).size.height * 0.28,
-            ),
-          ),
+          // Animasi Lottie untuk latar belakang bawah
+          // Align(
+          //   alignment: Alignment.bottomLeft,
+          //   child: Lottie.asset(
+          //     "assets/alquran.json", // File JSON Lottie
+          //     height: MediaQuery.of(context).size.height * 0.28,
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
         ],
       ),
     );

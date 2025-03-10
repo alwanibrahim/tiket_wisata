@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tiket_wisata/screens/home_screen.dart';
 import 'package:tiket_wisata/screens/profile_screen.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:tiket_wisata/components/button_mainlayout.dart'; 
+import 'package:tiket_wisata/components/button_mainlayout.dart';
+import 'package:tiket_wisata/screens/semuadoa_screen.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({Key? key}) : super(key: key);
@@ -17,6 +18,7 @@ class _MainLayoutState extends State<MainLayout> {
   final List<Widget> _pages = [
      HomeScreen(),
      ProfileScreen(),
+     SemuadoaScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -37,6 +39,7 @@ class _MainLayoutState extends State<MainLayout> {
         items: [
           buttonMainlayout(icon:  Icon(Icons.home), teks: 'Home', color: Colors.blue),
           buttonMainlayout(icon:  Icon(Icons.person), teks: 'Profile', color: Colors.green),
+          buttonMainlayout(icon:  Icon(Icons.book), teks: 'Doa', color: Colors.green),
         ],
       ),
     );
