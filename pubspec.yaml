@@ -21,6 +21,7 @@ dependencies:
   flutter_animate: ^4.2.0
   salomon_bottom_bar: ^3.3.2
   carousel_slider: ^5.0.0
+  qr_flutter: ^4.1.0
   
 
 dev_dependencies:

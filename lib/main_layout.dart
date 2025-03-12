@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tiket_wisata/screens/order_screen.dart';
+import 'package:tiket_wisata/constants/colors.dart';
+import 'package:tiket_wisata/screens/order/order_screen.dart';
+import 'package:tiket_wisata/screens/order/tiket_page.dart';
 import 'package:tiket_wisata/screens/profile_screen.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:tiket_wisata/components/button_mainlayout.dart'; 
+import 'package:tiket_wisata/components/button_mainlayout.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({Key? key}) : super(key: key);
@@ -15,8 +17,9 @@ class _MainLayoutState extends State<MainLayout> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-     OrderPage(),
-     ProfileScreen(),
+    OrderPage(),
+    TicketPage(),
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -35,8 +38,12 @@ class _MainLayoutState extends State<MainLayout> {
         unselectedItemColor: const Color(0xff757575),
         onTap: _onItemTapped,
         items: [
-          buttonMainlayout(icon:  Icon(Icons.home), teks: 'Home', color: Colors.blue),
-          buttonMainlayout(icon:  Icon(Icons.person), teks: 'Profile', color: Colors.green),
+          buttonMainlayout(
+              icon: Icon(Icons.home), teks: 'Home', color: AppColors.secondary),
+          buttonMainlayout(
+              icon: Icon(Icons.confirmation_num), teks: 'tiket', color: AppColors.secondary),
+          buttonMainlayout(
+              icon: Icon(Icons.person), teks: 'Profile', color: AppColors.secondary),
         ],
       ),
     );

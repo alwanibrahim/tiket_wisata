@@ -1,6 +1,6 @@
 import 'package:concentric_transition/concentric_transition.dart';
 import 'package:flutter/material.dart';
-import 'package:tiket_wisata/screens/login_screen.dart';
+import 'package:tiket_wisata/screens/Auth/login_screen.dart';
 
 final pages = [
   const PageData(

@@ -2,18 +2,17 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:tiket_wisata/main_layout.dart';
-import 'package:tiket_wisata/screens/register_screen.dart';
+import 'package:tiket_wisata/screens/Auth/login_screen.dart';
 
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -35,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
         final data = jsonDecode(response.body);
         showInvalidMessage('Berhasil register! Token: ${data['token']}');
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => MainLayout()));
+            context, MaterialPageRoute(builder: (context) => LoginScreen()));
       } else {
         final errorData = jsonDecode(response.body);
         showInvalidMessage('Register gagal: ${errorData['error']}');
@@ -57,7 +56,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,8 +64,8 @@ class _LoginScreenState extends State<LoginScreen> {
           Align(
             alignment: Alignment.topLeft,
             child: Image.asset(
-              "assets/gambar01.png",
-              width: MediaQuery.of(context).size.width * 0.9,
+              "assets/signUp01.png",
+              width: MediaQuery.of(context).size.width * 0.3,
             ),
           ),
           SingleChildScrollView(
@@ -76,20 +74,11 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.15,
+                  height: MediaQuery.of(context).size.height * 0.1,
                 ),
                 const Text(
-                  "Hello",
-                  style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.015,
-                ),
-                const Text(
-                  "Sign in to your account",
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
+                  "Create account",
+                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.07,
@@ -104,7 +93,100 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(
                               MediaQuery.of(context).size.width * 0.1),
                           child: TextFormField(
-                            controller: emailController,
+                            decoration: InputDecoration(
+                              hintText: "Username",
+                              hintStyle: TextStyle(
+                                color: Colors.grey,
+                              ),
+                              prefixIcon: Icon(
+                                Icons.person,
+                                size: MediaQuery.of(context).size.width * 0.06,
+                                color: Colors.grey,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(
+                                      MediaQuery.of(context).size.width * 0.1),
+                                ),
+                                borderSide: const BorderSide(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(
+                                      MediaQuery.of(context).size.width * 0.1),
+                                ),
+                                borderSide: BorderSide(
+                                  color:
+                                      const Color.fromARGB(255, 225, 121, 243),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.008,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 30, right: 30),
+                        child: Material(
+                          elevation: 4,
+                          borderRadius: BorderRadius.circular(
+                              MediaQuery.of(context).size.width * 0.1),
+                          child: TextFormField(
+                            controller: passwordController,
+                            decoration: InputDecoration(
+                              hintText: "Password",
+                              hintStyle: TextStyle(
+                                color: Colors.grey,
+                              ),
+                              prefixIcon: Icon(
+                                Icons.lock,
+                                size: MediaQuery.of(context).size.width * 0.06,
+                                color: Colors.grey,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(
+                                      MediaQuery.of(context).size.width * 0.1),
+                                ),
+                                borderSide: const BorderSide(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(
+                                      MediaQuery.of(context).size.width * 0.1),
+                                ),
+                                borderSide: BorderSide(
+                                  color:
+                                      const Color.fromARGB(255, 225, 121, 243),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.008,
+                                ),
+                              ),
+                            ),
+                            keyboardType: TextInputType.visiblePassword,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 30, right: 30),
+                        child: Material(
+                          elevation: 4,
+                          borderRadius: BorderRadius.circular(
+                              MediaQuery.of(context).size.width * 0.1),
+                          child: TextFormField(
+                                                        controller: emailController,
+
                             decoration: InputDecoration(
                               hintText: "Email",
                               hintStyle: TextStyle(
@@ -171,7 +253,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.035,
+                        height: MediaQuery.of(context).size.height * 0.02,
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 30, right: 30),
@@ -180,9 +262,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(
                               MediaQuery.of(context).size.width * 0.1),
                           child: TextFormField(
-                            controller: passwordController,
                             decoration: InputDecoration(
-                              hintText: "Password",
+                              hintText: "Mobile",
                               hintStyle: TextStyle(
                                 color: Colors.grey,
                               ),
@@ -190,26 +271,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Icons.lock,
                                 size: MediaQuery.of(context).size.width * 0.06,
                                 color: Colors.grey,
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.01),
-                                ),
-                                borderSide: const BorderSide(
-                                  color: Colors.red,
-                                ),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: BorderSide(
-                                  color: Colors.red,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.01,
-                                ),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(
@@ -233,31 +294,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                             ),
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'This field cannot be empty';
-                              }
-                              if (!value.contains('@')) {
-                                return 'Please enter a valid email';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.03,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 32),
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            "Forget you password",
-                            style: TextStyle(
-                              color: Colors.grey,
-                            ),
+                            keyboardType: TextInputType.phone,
                           ),
                         ),
                       ),
@@ -270,7 +307,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text(
-                              "Sign in",
+                              "Sign up",
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -313,36 +350,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.1,
+                        height: MediaQuery.of(context).size.height * 0.06,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Don't have an account? ",
-                            style: TextStyle(fontSize: 14),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => RegisterScreen(),
-                                ),
-                              );
-                            },
-                            child: Text(
-                              "Create",
-                              style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                decorationThickness: 2.0,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
+                      Text(
+                        "Or create account using social media",
+                        style: TextStyle(fontSize: 14),
                       ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                      Image.asset("assets/icons.png")
                     ],
                   ),
                 ),
@@ -352,8 +369,8 @@ class _LoginScreenState extends State<LoginScreen> {
           Align(
             alignment: Alignment.bottomLeft,
             child: Image.asset(
-              "assets/gambar02.png",
-              height: MediaQuery.of(context).size.height * 0.28,
+              "assets/signUp02.png",
+              height: MediaQuery.of(context).size.height * 0.25,
             ),
           ),
         ],
@@ -361,3 +378,5 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
+

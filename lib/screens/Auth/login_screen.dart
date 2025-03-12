@@ -2,17 +2,17 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:tiket_wisata/screens/login_screen.dart';
+import 'package:tiket_wisata/main_layout.dart';
+import 'package:tiket_wisata/screens/Auth/register_screen.dart';
 
-
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -25,8 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
 
     try {
-      final response = await http.post(
-          Uri.parse('https://reqres.in/api/login'),
+      final response = await http.post(Uri.parse('https://reqres.in/api/login'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({'email': email, 'password': password}));
 
@@ -34,7 +33,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         final data = jsonDecode(response.body);
         showInvalidMessage('Berhasil register! Token: ${data['token']}');
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => LoginScreen()));
+            context, MaterialPageRoute(builder: (context) => MainLayout()));
       } else {
         final errorData = jsonDecode(response.body);
         showInvalidMessage('Register gagal: ${errorData['error']}');
@@ -56,6 +55,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,8 +64,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           Align(
             alignment: Alignment.topLeft,
             child: Image.asset(
-              "assets/signUp01.png",
-              width: MediaQuery.of(context).size.width * 0.3,
+              "assets/gambar01.png",
+              width: MediaQuery.of(context).size.width * 0.9,
             ),
           ),
           SingleChildScrollView(
@@ -74,11 +74,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
+                  height: MediaQuery.of(context).size.height * 0.15,
                 ),
                 const Text(
-                  "Create account",
-                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                  "Hello",
+                  style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.015,
+                ),
+                const Text(
+                  "Sign in to your account",
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.07,
@@ -93,100 +102,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           borderRadius: BorderRadius.circular(
                               MediaQuery.of(context).size.width * 0.1),
                           child: TextFormField(
-                            decoration: InputDecoration(
-                              hintText: "Username",
-                              hintStyle: TextStyle(
-                                color: Colors.grey,
-                              ),
-                              prefixIcon: Icon(
-                                Icons.person,
-                                size: MediaQuery.of(context).size.width * 0.06,
-                                color: Colors.grey,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: BorderSide(
-                                  color:
-                                      const Color.fromARGB(255, 225, 121, 243),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.008,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.02,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 30, right: 30),
-                        child: Material(
-                          elevation: 4,
-                          borderRadius: BorderRadius.circular(
-                              MediaQuery.of(context).size.width * 0.1),
-                          child: TextFormField(
-                            controller: passwordController,
-                            decoration: InputDecoration(
-                              hintText: "Password",
-                              hintStyle: TextStyle(
-                                color: Colors.grey,
-                              ),
-                              prefixIcon: Icon(
-                                Icons.lock,
-                                size: MediaQuery.of(context).size.width * 0.06,
-                                color: Colors.grey,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.width * 0.1),
-                                ),
-                                borderSide: BorderSide(
-                                  color:
-                                      const Color.fromARGB(255, 225, 121, 243),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.008,
-                                ),
-                              ),
-                            ),
-                            keyboardType: TextInputType.visiblePassword,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.02,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 30, right: 30),
-                        child: Material(
-                          elevation: 4,
-                          borderRadius: BorderRadius.circular(
-                              MediaQuery.of(context).size.width * 0.1),
-                          child: TextFormField(
-                                                        controller: emailController,
-
+                            controller: emailController,
                             decoration: InputDecoration(
                               hintText: "Email",
                               hintStyle: TextStyle(
@@ -253,7 +169,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.02,
+                        height: MediaQuery.of(context).size.height * 0.035,
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 30, right: 30),
@@ -262,8 +178,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           borderRadius: BorderRadius.circular(
                               MediaQuery.of(context).size.width * 0.1),
                           child: TextFormField(
+                            controller: passwordController,
                             decoration: InputDecoration(
-                              hintText: "Mobile",
+                              hintText: "Password",
                               hintStyle: TextStyle(
                                 color: Colors.grey,
                               ),
@@ -271,6 +188,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 Icons.lock,
                                 size: MediaQuery.of(context).size.width * 0.06,
                                 color: Colors.grey,
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(
+                                      MediaQuery.of(context).size.width * 0.01),
+                                ),
+                                borderSide: const BorderSide(
+                                  color: Colors.red,
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(
+                                      MediaQuery.of(context).size.width * 0.1),
+                                ),
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.01,
+                                ),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(
@@ -294,7 +231,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                               ),
                             ),
-                            keyboardType: TextInputType.phone,
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'This field cannot be empty';
+                              }
+                              if (!value.contains('@')) {
+                                return 'Please enter a valid email';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.03,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 32),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            "Forget you password",
+                            style: TextStyle(
+                              color: Colors.grey,
+                            ),
                           ),
                         ),
                       ),
@@ -307,7 +268,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text(
-                              "Sign up",
+                              "Sign in",
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -341,7 +302,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 height:
                                     MediaQuery.of(context).size.height * 0.05,
                                 child: IconButton(
-                                  onPressed: register,
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/main');
+                                  },
                                   icon: Icon(Icons.navigate_next_rounded),
                                 ),
                               ),
@@ -350,16 +313,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.06,
+                        height: MediaQuery.of(context).size.height * 0.1,
                       ),
-                      Text(
-                        "Or create account using social media",
-                        style: TextStyle(fontSize: 14),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Don't have an account? ",
+                            style: TextStyle(fontSize: 14),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => RegisterScreen(),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              "Create",
+                              style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                decorationThickness: 2.0,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.02,
-                      ),
-                      Image.asset("assets/icons.png")
                     ],
                   ),
                 ),
@@ -369,8 +352,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           Align(
             alignment: Alignment.bottomLeft,
             child: Image.asset(
-              "assets/signUp02.png",
-              height: MediaQuery.of(context).size.height * 0.25,
+              "assets/gambar02.png",
+              height: MediaQuery.of(context).size.height * 0.28,
             ),
           ),
         ],
@@ -378,6 +361,3 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 }
-
-
- 
